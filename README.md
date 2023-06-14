@@ -1,6 +1,8 @@
 ASSIGNMENT:
  create a phonebook API which will enable a user to save a persons details edit and delete also assign a person to a certain group. persons details include full name, mobile number ,work number, email, home address and group id
 
+ looking at our file structure we created one file named src to carry all the api's logic which include the controllers and routes.
+
  Before using the API create this:
 CREATE DATABASE phoneBook;
 
