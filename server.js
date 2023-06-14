@@ -1,5 +1,5 @@
 import express from 'express';
-import config from '../db/config.js';
+import config from './src/db/config.js';
 import phoneBookRoutes from './src/routes/phoneBookRoutes.js';
 
 const app = express();
