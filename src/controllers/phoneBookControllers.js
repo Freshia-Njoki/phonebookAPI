@@ -83,5 +83,23 @@ export const deleteUser = async (req, res) => {
         sql.close();
 
     }
+}
+
+//GET USERS IN A SPECIFIC GROUP
+export const groupCheck = async (req, res) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const result = await pool.request()
+            .query('SELECT Contacts.fullName, Groups.groupName FROM Contacts INNER JOIN Groups ON Contacts.groupId = Groups.groupId ')
+            res.status(200).json(result.recordset)
+
+    } catch (error) {
+        res.status(400).json(error);
+
+        
+    } finally {
+        sql.close();
+
+    }
 
 }
