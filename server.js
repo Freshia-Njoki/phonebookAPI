@@ -12,10 +12,10 @@ app.use(express.urlencoded({ extended: false }));
 //Routes
 phoneBookRoutes(app);
 app.get("/",(req,res)=>{
-    res.send("Hello World");
 
+    res.send("API that adds contacts to phone book");
 })
 app.listen(config.port,()=>{
-    console.log(`Server is running on port ${config.port}`);
-
+    
+    console.log(`Server is running on  ${config.url}`);
 });

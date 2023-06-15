@@ -1,4 +1,5 @@
-import { addUser, deleteUser,  updateUser, checkUsers, groupCheck} from '../phoneBookRoutes.js';
+import { addUser, deleteUser,  updateUser, checkUsers, groupCheck} from '../controllers/phoneBookControllers.js';
+
 
 const routes = (app) => {
    //adding user routes 
@@ -7,7 +8,7 @@ const routes = (app) => {
         .post(addUser);
 
     app.route('/user/:id')
-        .post(updateUser)
+        .put(updateUser)
         .delete(deleteUser);
 
     app.route('/groups')

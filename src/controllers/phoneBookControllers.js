@@ -1,10 +1,11 @@
 import sql from 'mssql'
-
+import config from '../db/config.js';
 
 //ADDING A USER
 export const addUser = async (req, res) => {
     try {
         let pool = await sql.connect(config.sql);
+        const {id, fullName, email, mobileNo, workNo, address, groupId} = req.body;
         await pool.request()
             .input('id', sql.Int, id)
             .input('fullName', sql.VarChar, fullName)
@@ -18,6 +19,7 @@ export const addUser = async (req, res) => {
 
     } catch (error) {
         res.status(400).json(error);
+       
 
         
     } finally {
@@ -29,8 +31,10 @@ export const addUser = async (req, res) => {
 //UPDATING A USER
 export const updateUser = async (req, res) => {
     try {
-        let pool = await sql.connect(config.sql);
         const { id } = req.params;
+        const { fullName } = req.body;
+        let pool = await sql.connect(config.sql);
+        
         await pool.request()
             .input('id', sql.Int, id) 
             .input('fullName', sql.VarChar, fullName) 
@@ -49,7 +53,7 @@ export const updateUser = async (req, res) => {
 }
 
 //GET ALL USERS
-export const checkUser = async (req, res) => {
+export const checkUsers = async (req, res) => {
     try {
         let pool = await sql.connect(config.sql);
         const result = await pool.request()
@@ -66,9 +70,11 @@ export const checkUser = async (req, res) => {
     }
 
 }
+
  //DELETING A USER
 export const deleteUser = async (req, res) => {
     try {
+        const { id } = req.params
         let pool = await sql.connect(config.sql);
         await pool.request()
             .input('id', sql.Int, id) 
@@ -90,8 +96,8 @@ export const groupCheck = async (req, res) => {
     try {
         let pool = await sql.connect(config.sql);
         const result = await pool.request()
-            .query('SELECT Contacts.fullName, Groups.groupName FROM Contacts INNER JOIN Groups ON Contacts.groupId = Groups.groupId ')
-            res.status(200).json(result.recordset)
+            .query('SELECT Contacts.fullName, groups.groupName FROM Contacts JOIN Groups ON Contacts.groupId = Groups.id ')
+            res.status(200).json(result)
 
     } catch (error) {
         res.status(400).json(error);
